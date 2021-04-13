@@ -1,18 +1,16 @@
-from flask import Flask, render_template, redirect, url_for, flash, request, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap
+from flask_ckeditor import CKEditor
 from datetime import date
+from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-from flask_gravatar import Gravatar
-from functools import wraps
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-from flask_ckeditor import CKEditor
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from forms import LoginForm, RegisterForm, CreatePostForm, CommentForm
+from flask_gravatar import Gravatar
 import os
 
-Base = declarative_base()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
@@ -244,6 +242,6 @@ def delete_post(post_id):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    # app.run(host='0.0.0.0', port=5000)
     # app.run(debug=True)
-    # app.run()
+    app.run()
